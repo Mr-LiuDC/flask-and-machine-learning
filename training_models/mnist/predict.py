@@ -11,7 +11,8 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 model = tf.keras.models.load_model('../trained_models/my_mnist_trained_model.h5')
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
 # 要测试的图片
-image_path = "../data_set/test_set/mnist/test_image_002.png"
+image_path = "../data_set/test_set/mnist/test_image_003.png"
+input_image_path = "../data_set/test_set/mnist/test_image_003_predict.png"
 
 
 def look_image(data):
@@ -50,4 +51,4 @@ for _ in contours:
         image_z = cv2.rectangle(image_, (x - 10, y - 10), (x + w - 10, y + h - 10), (255, 0, 0), 1)
         image_z = cv2.putText(image_z, data_predict, (x + 10, y + 10), font, 0.7, (0, 0, 255), 1)
 look_image(image_z)
-save = cv2.imwrite("../data_set/test_set/mnist/test_image_002_predict.png", image_z)
+save = cv2.imwrite(input_image_path, image_z)
