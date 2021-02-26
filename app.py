@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, render_template
 
 app = Flask(__name__)
 
@@ -6,6 +6,11 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     return "Hello World !"
+
+
+@app.route('/mnist-index.html')
+def main():
+    return render_template('mnist-index.html')
 
 
 @app.route('/favicon.ico')
