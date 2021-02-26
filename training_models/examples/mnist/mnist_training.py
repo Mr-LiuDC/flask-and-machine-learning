@@ -1,6 +1,11 @@
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+
+'''屏蔽警告 tensorflow/core/platform/cpu_feature_guard.cc:142 '''
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 '''载入并准备好 MNIST 数据集。将样本从整数转换为浮点数'''
 mnist = tf.keras.datasets.mnist
@@ -36,14 +41,14 @@ model.fit(train_images, train_labels, epochs=5)
 model.evaluate(test_images, test_labels, verbose=2)
 
 '''保存训练得到的模型'''
-model.save("../trained_models/mnist_trained_model")
+model.save("../trained_models/mnist_trained_model.h5")
 
 '''加载已有的训练模型'''
-mnist_dense = tf.keras.models.load_model("../trained_models/mnist_trained_model")
+mnist_dense = tf.keras.models.load_model("../trained_models/mnist_trained_model.h5")
 mnist_dense.summary()
 
 '''识别预测手写数字'''
-forecast = train_images[1].reshape(1, -1)
+forecast = train_images[1].reshape(-1, 28, 28, 1)
 res = mnist_dense.predict(forecast)
 print(res)
 print("预测的数字为：", np.argmax(res))
