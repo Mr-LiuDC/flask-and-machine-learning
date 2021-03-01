@@ -1,4 +1,5 @@
-from flask import Flask, send_from_directory, render_template, json
+import numpy as np
+from flask import Flask, send_from_directory, render_template, json, request
 
 app = Flask(__name__)
 
@@ -8,8 +9,9 @@ def hello_world():
     return "Hello World !"
 
 
-@app.route("/api/mnist", methods=['GET', 'POST'])
+@app.route("/api/mnist", methods=['POST'])
 def mnist():
+    input = ((255 - np.array(request.json, dtype=np.uint8)) / 255.0).reshape(1, 784)
     return json.jsonify()
 
 
