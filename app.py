@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, render_template
+from flask import Flask, send_from_directory, render_template, json
 
 app = Flask(__name__)
 
@@ -6,6 +6,11 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     return "Hello World !"
+
+
+@app.route("/api/mnist", methods=['GET', 'POST'])
+def mnist():
+    return json.jsonify()
 
 
 @app.route('/mnist-index.html')
