@@ -1,5 +1,10 @@
+import os
+
 import numpy as np
+import tensorflow as tf
 from flask import Flask, send_from_directory, render_template, json, request
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 app = Flask(__name__)
 
@@ -11,8 +16,10 @@ def hello_world():
 
 @app.route("/api/mnist", methods=['POST'])
 def mnist():
-    input = ((255 - np.array(request.json, dtype=np.uint8)) / 255.0).reshape(1, 784)
-    return json.jsonify()
+    input_data = ((255 - np.array(request.json, dtype=np.uint8)) / 255.0).reshape(1, 784)
+    model1 = tf.keras.models.load_model('./training_models/trained_models/my_mnist_trained_model.h5')
+    pred1 = model1.predict(input_data.reshape(-1, 28, 28, 1)).flatten().tolist()
+    return json.jsonify(results=[pred1])
 
 
 @app.route('/mnist-index.html')
