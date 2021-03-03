@@ -1,7 +1,8 @@
 import numpy as np
 import tensorflow as tf
 from PIL import Image
-from convolution_training import CNN
+
+from training_models.mnist.convolution_training import CNN
 
 
 class Predict(object):
