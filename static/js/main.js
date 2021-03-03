@@ -116,9 +116,9 @@ class Main {
                         }
                         for (let j = 0; j < 10; j++) {
                             if (j === max_index) {
-                                $('#output tr').eq(j + 1).find('td').eq(i).addClass('success');
+                                $('#output tr').eq(j + 1).find('td').eq(i).addClass('table-success');
                             } else {
-                                $('#output tr').eq(j + 1).find('td').eq(i).removeClass('success');
+                                $('#output tr').eq(j + 1).find('td').eq(i).removeClass('table-success');
                             }
                         }
                     }
